@@ -1,0 +1,15 @@
+<h2>Login</h2>
+
+<dx-form [formData]="user">
+  <dxi-item dataField="email" editorType="dxTextBox" [editorOptions]="{ placeholder: 'Email' }"></dxi-item>
+  <dxi-item dataField="password" editorType="dxTextBox" [editorOptions]="{ mode: 'password', placeholder: 'Password' }"></dxi-item>
+  <dxi-item>
+    <dx-button text="Login" type="success" (click)="onSubmit()"></dx-button>
+  </dxi-item>
+</dx-form>
+
+<div style="margin-top: 10px;">
+  <a routerLink="/register" style="text-decoration: underline; cursor: pointer;">
+    Don't have an account? Register
+  </a>
+</div>
