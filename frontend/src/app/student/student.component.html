@@ -1,20 +1,35 @@
 <h1>Student List</h1>
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Phone</th>
-    <th>Actions</th>
-  </tr>
-  <tr *ngFor="let student of students">
-    <td>{{ student.name }}</td>
-    <td>{{ student.email }}</td>
-    <td>{{ student.phone }}</td>
-    <td>
-      <button (click)="updateStudent(student.id)">Edit</button>
-      <button (click)="deleteStudent(student.id)">Delete</button>
-    </td>
-  </tr>
-</table>
 
-<button (click)="createStudent()">Add New Student</button>
+<dx-data-grid
+  [dataSource]="students"
+  [showBorders]="true"
+  keyExpr="id"
+  [remoteOperations]="false"
+  (onRowInserted)="onRowInserted($event)"
+  (onRowUpdated)="onRowUpdated($event)"
+  (onRowRemoved)="onRowRemoved($event)"
+>
+  <dxo-sorting mode="multiple"></dxo-sorting>
+  <dxo-filter-row [visible]="true"></dxo-filter-row>
+  <dxo-header-filter [visible]="true"></dxo-header-filter>
+  <dxo-search-panel [visible]="true" [width]="240" placeholder="Search student"></dxo-search-panel>
+
+  <dxo-editing
+    mode="popup"
+    [allowUpdating]="true"
+    [allowDeleting]="true"
+    [allowAdding]="true"
+    [useIcons]="true"
+  >
+<dxo-popup [showTitle]="true" title="Student Details" [width]="600" [height]="350"></dxo-popup>
+  <dxo-form>
+    <dxi-item dataField="name" [isRequired]="true" editorType="dxTextBox"></dxi-item>
+    <dxi-item dataField="email" [isRequired]="true" editorType="dxTextBox"></dxi-item>
+    <dxi-item dataField="phone" [isRequired]="true" editorType="dxTextBox"></dxi-item>
+  </dxo-form>
+</dxo-editing>
+
+  <dxi-column dataField="name" caption="Name"></dxi-column>
+  <dxi-column dataField="email" caption="Email"></dxi-column>
+  <dxi-column dataField="phone" caption="Phone"></dxi-column>
+</dx-data-grid>
